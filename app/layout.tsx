@@ -1,14 +1,39 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Plus_Jakarta_Sans } from 'next/font/google'
 import './globals.css'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
+import ThemeProvider from '@/components/ThemeProvider'
 
-const inter = Inter({ subsets: ['latin'] })
+const font = Plus_Jakarta_Sans({ subsets: ['latin'], display: 'swap' })
 
 export const metadata: Metadata = {
-  title: 'GLIITCH Web Lab | Handcrafted Websites',
+  title: {
+    default: 'GLIITCH Web Lab | Handcrafted Websites',
+    template: '%s | GLIITCH Web Lab',
+  },
   description: 'Handcrafted websites powered by imagination & AI.',
+  metadataBase: new URL('https://gliitchweblab.example'),
+  icons: {
+    icon: '/favicon.ico',
+  },
+  openGraph: {
+    title: 'GLIITCH Web Lab',
+    description: 'Handcrafted websites powered by imagination & AI.',
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://gliitchweblab.example',
+    siteName: 'GLIITCH Web Lab',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'GLIITCH Web Lab',
+    description: 'Handcrafted websites powered by imagination & AI.',
+  },
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#0b1220' },
+  ],
 }
 
 export default function RootLayout({
@@ -17,11 +42,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Nav />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${font.className} bg-white dark:bg-muted-900 text-gray-900 dark:text-gray-100`}>
+        <ThemeProvider>
+          <Nav />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   )

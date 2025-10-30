@@ -4,6 +4,8 @@ export interface Template {
   description: string
   fullDescription: string
   techStack: string[]
+  imageUrl?: string
+  demoUrl?: string
 }
 
 export const templates: Template[] = [
@@ -14,6 +16,8 @@ export const templates: Template[] = [
     fullDescription:
       'Responsive, clean, SEO-friendly site built with Next.js & Tailwind. Perfect for startups looking to make a professional first impression. Includes hero section, features, testimonials, and pricing sections.',
     techStack: ['Next.js', 'Tailwind CSS', 'TypeScript', 'React'],
+    imageUrl: '/landing-page.png',
+    demoUrl: '/templates/startup-landing/index.html',
   },
   {
     id: 'portfolio-creative',

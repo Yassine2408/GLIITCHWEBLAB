@@ -8,7 +8,16 @@ export default function Home() {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative overflow-hidden py-24 bg-gradient-to-b from-primary-50 to-white dark:from-muted-900 dark:to-muted-900">
-        <div className="pointer-events-none absolute inset-0 bg-grid [background-size:16px_16px] opacity-50 dark:opacity-20" />
+        {/* Hero background image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/hero-bg.png"
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover opacity-45 dark:opacity-35"
+        />
+        {/* Light-mode softening layer to avoid harsh visuals */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-transparent dark:from-transparent dark:via-transparent dark:to-transparent" />
+        <div className="pointer-events-none absolute inset-0 bg-grid [background-size:16px_16px] opacity-30 dark:opacity-15" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center space-x-2 rounded-full border border-gray-200 dark:border-gray-800 bg-white/70 dark:bg-gray-900/40 backdrop-blur px-3 py-1 mb-6">
             <span className="h-2 w-2 rounded-full bg-primary-500 animate-pulse" />
@@ -49,8 +58,15 @@ export default function Home() {
                 key={template.id}
                 className="group bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 overflow-hidden hover:shadow-subtle transition"
               >
-                <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center">
-                  <span className="text-gray-400 text-sm">Preview Image</span>
+                <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 overflow-hidden">
+                  {template.imageUrl ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={template.imageUrl} alt={template.name} className="w-full h-full object-cover" />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <span className="text-gray-400 text-sm">Preview Image</span>
+                    </div>
+                  )}
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
@@ -61,7 +77,8 @@ export default function Home() {
                   </p>
                   <div className="flex space-x-3">
                     <Link
-                      href={`/templates/${template.id}`}
+                      href={template.demoUrl ?? `/templates/${template.id}`}
+                      target={template.demoUrl ? '_blank' : undefined}
                       className="flex-1 text-center py-2 px-4 border border-gray-300 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition text-sm"
                     >
                       View Demo

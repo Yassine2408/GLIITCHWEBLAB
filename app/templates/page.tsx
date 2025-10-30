@@ -15,8 +15,15 @@ export default function TemplatesPage() {
               key={template.id}
               className="group bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 overflow-hidden hover:shadow-subtle transition"
             >
-              <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center">
-                <span className="text-gray-400 text-sm">Preview Image</span>
+              <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 overflow-hidden">
+                {template.imageUrl ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={template.imageUrl} alt={template.name} className="w-full h-full object-cover" />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center">
+                    <span className="text-gray-400 text-sm">Preview Image</span>
+                  </div>
+                )}
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
@@ -27,7 +34,8 @@ export default function TemplatesPage() {
                 </p>
                 <div className="flex space-x-3">
                   <Link
-                    href={`/templates/${template.id}`}
+                    href={template.demoUrl ?? `/templates/${template.id}`}
+                    target={template.demoUrl ? '_blank' : undefined}
                     className="flex-1 text-center py-2 px-4 border border-gray-300 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition text-sm"
                   >
                     View Demo

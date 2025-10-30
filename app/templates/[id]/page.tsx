@@ -27,9 +27,34 @@ export default function TemplatePage({ params }: { params: { id: string } }) {
         
         <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 overflow-hidden shadow-subtle">
           {/* Preview Section */}
-          <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center mb-6">
-            <span className="text-gray-400">Full Page Preview</span>
-          </div>
+          {template.demoUrl ? (
+            <div>
+              <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 dark:border-gray-800">
+                <span className="text-sm text-gray-600 dark:text-gray-400">Interactive demo preview</span>
+                <Link href={template.demoUrl} target="_blank" className="text-sm font-medium text-primary-600 dark:text-primary-400 hover:underline">
+                  Open full demo ↗
+                </Link>
+              </div>
+              <div className="aspect-video bg-white">
+                <iframe
+                  src={template.demoUrl}
+                  title={`${template.name} demo`}
+                  className="w-full h-full"
+                />
+              </div>
+            </div>
+          ) : (
+            <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 overflow-hidden">
+              {template.imageUrl ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={template.imageUrl} alt={`${template.name} preview`} className="w-full h-full object-cover" />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center">
+                  <span className="text-gray-400">Full Page Preview</span>
+                </div>
+              )}
+            </div>
+          )}
           
           <div className="p-8">
             <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">

@@ -15,7 +15,9 @@ export const metadata: Metadata = {
   description: 'Handcrafted websites powered by imagination & AI.',
   metadataBase: new URL('https://gliitchweblab.example'),
   icons: {
-    icon: '/favicon.ico',
+    icon: '/logo.png',
+    shortcut: '/logo.png',
+    apple: '/logo.png',
   },
   openGraph: {
     title: 'GLIITCH Web Lab',

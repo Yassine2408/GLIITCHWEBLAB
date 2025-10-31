@@ -23,3 +23,24 @@
   }
 }
 
+@layer utilities {
+  /* Simple, reusable animation utilities */
+  @keyframes fadeUp {
+    0% { opacity: 0; transform: translateY(8px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-up {
+    animation: fadeUp 600ms ease forwards;
+    opacity: 0; /* ensure starting state before animation runs */
+  }
+
+  @keyframes floatSlow {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+  }
+  .animate-float-slow {
+    animation: floatSlow 5s ease-in-out infinite;
+  }
+}
+

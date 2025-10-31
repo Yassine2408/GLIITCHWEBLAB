@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Next Landing • GLIITCH Web Lab</title>
+    <meta name="description" content="Clean, modern landing built with semantic HTML and utility CSS." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+      :root{
+        --bg:#0b1220;--panel:#0f172a;--muted:#9aa5b1;--text:#e6edf6;
+        --primary:#62d5ff;--accent:#a78bfa;--ring:rgba(98,213,255,.35)
+      }
+      html,body{height:100%}
+      *{box-sizing:border-box}
+      body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:radial-gradient(900px 600px at 10% -10%, #101b33 0%, rgba(16,27,51,0) 55%),radial-gradient(800px 500px at 110% 10%, #121a30 0%, rgba(18,26,48,0) 55%),linear-gradient(180deg,#0b1220,#0a111e);color:var(--text)}
+      a{color:inherit;text-decoration:none}
+      .container{width:100%;max-width:1120px;padding:0 20px;margin:0 auto}
+      .header{position:sticky;top:0;z-index:20;backdrop-filter:blur(10px);background:rgba(15,23,42,.5);border-bottom:1px solid rgba(255,255,255,.06)}
+      .nav{height:64px;display:flex;align-items:center;justify-content:space-between}
+      .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.2px}
+      .brand-badge{height:30px;width:30px;border-radius:9px;overflow:hidden;box-shadow:0 8px 24px -12px var(--ring)}
+      .brand-badge img{height:100%;width:100%;object-fit:cover}
+      .chip{font-size:12px;color:var(--muted);border:1px solid rgba(255,255,255,.08);padding:6px 10px;border-radius:999px}
+
+      .hero{position:relative;padding:96px 0;text-align:center}
+      .glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(600px 300px at 50% 0%, rgba(98,213,255,.22) 0%, rgba(98,213,255,0) 60%)}
+      .title{font-size:clamp(36px,6vw,64px);font-weight:800;letter-spacing:-.02em;margin:0 0 12px}
+      .subtitle{max-width:760px;margin:0 auto 28px;font-size:clamp(16px,2.2vw,20px);color:var(--muted)}
+      .buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+      .btn{padding:12px 18px;border-radius:12px;font-weight:600;border:1px solid rgba(255,255,255,.08)}
+      .btn-primary{background:linear-gradient(90deg,var(--primary),#7cc7ff);color:#051321;border:none;box-shadow:0 10px 30px -10px var(--ring)}
+      .btn-ghost{color:var(--text)}
+
+      .section{padding:64px 0}
+      .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+      .card{background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01));border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:20px}
+      .card .icon{height:40px;width:40px;border-radius:10px;background:rgba(98,213,255,.16);display:flex;align-items:center;justify-content:center;color:var(--primary);font-weight:700;margin-bottom:12px}
+      .card h3{margin:0 0 6px;font-size:16px}
+      .card p{margin:0;color:var(--muted);font-size:14px;line-height:1.55}
+
+      .showcase{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}
+      .shot{border:1px solid rgba(255,255,255,.06);border-radius:16px;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01))}
+      .shot-lg{min-height:340px}
+      .shot-sm{min-height:160px}
+
+      .footer{text-align:center;padding:36px 0;color:var(--muted);font-size:13px}
+      @media(max-width:960px){.grid,.showcase{grid-template-columns:1fr}}
+      @media(max-width:600px){.hero{padding:72px 0}.nav{height:56px}.btn{width:100%}}
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container nav">
+        <div class="brand">
+          <div class="brand-badge"><img src="/logo.png" alt="G-Lab" /></div>
+          <span style="background:linear-gradient(90deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent;">G‑Lab</span>
+        </div>
+        <span class="chip">Preview • Next Landing</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="glow"></div>
+        <div class="container">
+          <h1 class="title">Launch beautiful pages — fast.</h1>
+          <p class="subtitle">A refined hero + features + showcase layout. Built to be copied into your Next.js project and themed in minutes.</p>
+          <div class="buttons">
+            <a class="btn btn-primary" href="#features">Explore Features</a>
+            <a class="btn btn-ghost" href="#showcase">See Showcase</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="section">
+        <div class="container">
+          <div class="grid">
+            <div class="card">
+              <div class="icon">A</div>
+              <h3>Accessible</h3>
+              <p>Focus states, readable contrast, semantic HTML, and keyboard nav.</p>
+            </div>
+            <div class="card">
+              <div class="icon">R</div>
+              <h3>Responsive</h3>
+              <p>Mobile‑first layout with balanced spacing across breakpoints.</p>
+            </div>
+            <div class="card">
+              <div class="icon">S</div>
+              <h3>Simple</h3>
+              <p>Drop‑in sections with minimal CSS so you can adapt quickly.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="showcase" class="section">
+        <div class="container">
+          <div class="showcase">
+            <div class="shot shot-lg" style="display:flex;align-items:center;justify-content:center;color:var(--muted)">[ Large media placeholder ]</div>
+            <div class="shot shot-sm" style="display:flex;align-items:center;justify-content:center;color:var(--muted)">[ Secondary media ]</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">© GLIITCH Web Lab</footer>
+  </body>
+  </html>
+
+

@@ -26,6 +26,8 @@ export const templates: Template[] = [
     fullDescription:
       'A beautiful portfolio template designed for creatives. Features elegant animations, grid layouts, and smooth transitions. Built with React and styled with Tailwind CSS for easy customization.',
     techStack: ['React', 'Tailwind CSS', 'Framer Motion'],
+    imageUrl: '/creative-portfolio.png',
+    demoUrl: '/templates/portfolio-creative/index.html',
   },
   {
     id: 'blog-modern',
@@ -58,6 +60,16 @@ export const templates: Template[] = [
     fullDescription:
       'Corporate agency template featuring project portfolios, team profiles, and service pages. Ideal for design agencies, consultancies, and professional services. Clean, professional aesthetic.',
     techStack: ['Next.js', 'Tailwind CSS', 'TypeScript', 'React'],
+  },
+  {
+    id: 'next-landing',
+    name: 'Next Landing',
+    description: 'Clean, modern landing with hero, features, and showcase.',
+    fullDescription:
+      'A focused landing layout featuring a strong hero, concise features, and a small media showcase. Built to be a great starting point for SaaS, tools, and product sites.',
+    techStack: ['HTML', 'CSS'],
+    imageUrl: '/landing-page.png',
+    demoUrl: '/templates/next-landing/index.html',
   },
 ]
 

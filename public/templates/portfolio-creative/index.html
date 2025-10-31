@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Creative Portfolio • GLIITCH Web Lab</title>
+    <meta name="description" content="Innovative portfolio showcasing creative work with modern interactions." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+      :root{
+        --bg:#0a0a0f;
+        --panel:#0f0f16;
+        --muted:#8b92a8;
+        --text:#e8eaf6;
+        --primary:#ff6b9d;
+        --accent:#a78bfa;
+        --ring:rgba(255,107,157,.35)
+      }
+      *{box-sizing:border-box}
+      html{scroll-behavior:smooth}
+      body{margin:0;font-family:'Inter',system-ui,-apple-system,sans-serif;background:radial-gradient(1200px 800px at 15% -20%,#1a0f2e 0%,rgba(26,15,46,0) 60%),radial-gradient(1000px 600px at 85% 15%,#0f1a2e 0%,rgba(15,26,46,0) 55%),linear-gradient(180deg,#0a0a0f,#0c0c13);color:var(--text);line-height:1.6}
+      a{color:inherit;text-decoration:none}
+      
+      .container{width:100%;max-width:1200px;padding:0 24px;margin:0 auto}
+      
+      /* Header */
+      .header{position:sticky;top:0;z-index:50;background:rgba(10,10,15,.7);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06)}
+      .nav{height:72px;display:flex;align-items:center;justify-content:space-between}
+      .brand{display:flex;align-items:center;gap:12px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px}
+      .brand img{height:36px;width:36px;border-radius:12px;object-fit:cover;box-shadow:0 8px 24px -12px var(--ring)}
+      .nav-links{display:flex;gap:32px}
+      .nav-links a{font-size:14px;font-weight:500;color:var(--muted);transition:color .2s}
+      .nav-links a:hover{color:var(--text)}
+      
+      /* Hero */
+      .hero{position:relative;padding:120px 0 80px;text-align:center;overflow:hidden}
+      .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(600px 400px at 50% 0%,rgba(255,107,157,.15) 0%,transparent 60%);pointer-events:none}
+      .avatar-wrap{position:relative;display:inline-block;margin-bottom:32px;animation:float 6s ease-in-out infinite}
+      .avatar{height:120px;width:120px;border-radius:50%;border:3px solid var(--primary);box-shadow:0 20px 60px -20px var(--ring);object-fit:cover}
+      @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+      .title{font-family:'Space Grotesk',sans-serif;font-size:clamp(42px,7vw,72px);font-weight:700;letter-spacing:-.03em;margin:0 0 16px;background:linear-gradient(135deg,var(--text) 0%,var(--muted) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+      .subtitle{font-size:clamp(18px,2.5vw,22px);color:var(--muted);max-width:680px;margin:0 auto 32px}
+      .cta{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+      .btn{padding:14px 24px;border-radius:12px;font-weight:600;font-size:15px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);transition:all .2s;cursor:pointer}
+      .btn:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);transform:translateY(-2px)}
+      .btn-primary{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;border:none;box-shadow:0 10px 40px -15px var(--ring)}
+      .btn-primary:hover{box-shadow:0 15px 50px -15px var(--ring);transform:translateY(-3px)}
+      
+      /* Stats */
+      .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin:80px 0}
+      .stat{text-align:center;padding:24px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:16px;backdrop-filter:blur(8px)}
+      .stat-number{font-family:'Space Grotesk',sans-serif;font-size:36px;font-weight:700;background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent;display:block;margin-bottom:8px}
+      .stat-label{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+      
+      /* About */
+      .about{padding:80px 0;background:rgba(255,255,255,.01)}
+      .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+      .about-text h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,4vw,42px);font-weight:700;margin:0 0 20px}
+      .about-text p{font-size:17px;color:var(--muted);line-height:1.7;margin-bottom:20px}
+      .skills{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+      .skill-tag{padding:8px 16px;background:rgba(255,107,157,.12);border:1px solid rgba(255,107,157,.2);border-radius:999px;font-size:13px;color:var(--primary)}
+      
+      /* Work Grid */
+      .work-section{padding:80px 0}
+      .section-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(36px,5vw,48px);font-weight:700;text-align:center;margin-bottom:16px}
+      .section-subtitle{text-align:center;color:var(--muted);margin-bottom:48px}
+      .filters{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:40px}
+      .filter-btn{padding:10px 20px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:999px;font-size:14px;color:var(--muted);cursor:pointer;transition:all .2s}
+      .filter-btn:hover,.filter-btn.active{background:rgba(255,107,157,.15);border-color:var(--primary);color:var(--text)}
+      .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+      .work-card{position:relative;aspect-ratio:4/3;border:1px solid rgba(255,255,255,.08);border-radius:20px;overflow:hidden;background:linear-gradient(135deg,rgba(255,255,255,.02),rgba(255,255,255,.01));cursor:pointer;transition:all .3s}
+      .work-card::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.6) 100%);opacity:0;transition:opacity .3s}
+      .work-card:hover{border-color:rgba(255,107,157,.3);transform:translateY(-8px);box-shadow:0 20px 60px -20px rgba(255,107,157,.2)}
+      .work-card:hover::before{opacity:1}
+      .work-card-content{position:absolute;bottom:0;left:0;right:0;padding:24px;z-index:1;transform:translateY(8px);transition:transform .3s}
+      .work-card:hover .work-card-content{transform:translateY(0)}
+      .work-card-category{display:inline-block;padding:6px 12px;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);border-radius:8px;font-size:12px;color:var(--primary);margin-bottom:12px;font-weight:600}
+      .work-card-title{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:600;margin:0 0 6px}
+      .work-card-desc{font-size:14px;color:var(--muted);margin:0}
+      .work-placeholder{display:flex;align-items:center;justify-content:center;height:100%;color:var(--muted);font-size:14px;background:linear-gradient(135deg,rgba(255,107,157,.08),rgba(167,139,250,.08))}
+      
+      /* Featured Project */
+      .featured{padding:80px 0;background:rgba(255,255,255,.01)}
+      .featured-content{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center}
+      .featured-visual{aspect-ratio:16/10;border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,.08);background:linear-gradient(135deg,rgba(255,107,157,.1),rgba(167,139,250,.1));display:flex;align-items:center;justify-content:center;color:var(--muted)}
+      .featured-info h3{font-family:'Space Grotesk',sans-serif;font-size:clamp(28px,4vw,36px);font-weight:700;margin:0 0 16px}
+      .featured-info p{font-size:17px;color:var(--muted);line-height:1.7;margin-bottom:24px}
+      .featured-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+      .featured-tag{padding:6px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:999px;font-size:12px;color:var(--muted)}
+      
+      /* Contact */
+      .contact{padding:80px 0}
+      .contact-card{max-width:600px;margin:0 auto;padding:48px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);border-radius:24px;text-align:center}
+      .contact-card h3{font-family:'Space Grotesk',sans-serif;font-size:clamp(28px,4vw,36px);font-weight:700;margin:0 0 16px}
+      .contact-card p{font-size:17px;color:var(--muted);margin-bottom:32px}
+      .contact-links{display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
+      .contact-link{display:flex;align-items:center;gap:10px;padding:12px 20px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;font-size:15px;color:var(--text);transition:all .2s}
+      .contact-link:hover{background:rgba(255,255,255,.06);border-color:rgba(255,107,157,.3);transform:translateY(-2px)}
+      
+      .footer{text-align:center;padding:48px 0;color:var(--muted);font-size:13px;border-top:1px solid rgba(255,255,255,.06)}
+      
+      @media(max-width:960px){
+        .nav-links{display:none}
+        .stats{grid-template-columns:repeat(2,1fr)}
+        .about-grid,.featured-content,.work-grid{grid-template-columns:1fr}
+        .hero{padding:80px 0 60px}
+      }
+      @media(max-width:640px){
+        .stats{grid-template-columns:1fr}
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container nav">
+        <div class="brand">
+          <img src="/logo.png" alt="Portfolio" />
+          <span>Alex Creative</span>
+        </div>
+        <nav class="nav-links">
+          <a href="#work">Work</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container">
+          <div class="avatar-wrap">
+            <img src="/logo.png" alt="Alex" class="avatar" />
+          </div>
+          <h1 class="title">Creative Designer & Developer</h1>
+          <p class="subtitle">I craft digital experiences that blend beautiful design with thoughtful functionality. Specialized in branding, web design, and interactive interfaces.</p>
+          <div class="cta">
+            <a href="#work" class="btn btn-primary">View Portfolio</a>
+            <a href="#contact" class="btn">Get In Touch</a>
+          </div>
+          
+          <div class="stats">
+            <div class="stat">
+              <span class="stat-number">50+</span>
+              <span class="stat-label">Projects</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">8+</span>
+              <span class="stat-label">Years</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">30+</span>
+              <span class="stat-label">Clients</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">12</span>
+              <span class="stat-label">Awards</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="about">
+        <div class="container">
+          <div class="about-grid">
+            <div class="about-text">
+              <h2>About Me</h2>
+              <p>I'm a multidisciplinary designer with a passion for creating experiences that resonate. My work spans brand identity, web design, and digital products.</p>
+              <p>I believe great design is invisible—it just works. Every project starts with understanding the problem, then crafting solutions that are both beautiful and functional.</p>
+              <div class="skills">
+                <span class="skill-tag">Brand Identity</span>
+                <span class="skill-tag">Web Design</span>
+                <span class="skill-tag">UI/UX</span>
+                <span class="skill-tag">Figma</span>
+                <span class="skill-tag">React</span>
+                <span class="skill-tag">Motion Design</span>
+              </div>
+            </div>
+            <div class="featured-visual">
+              [ Designer workspace visual ]
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="work" class="work-section">
+        <div class="container">
+          <h2 class="section-title">Selected Work</h2>
+          <p class="section-subtitle">A curated selection of recent projects</p>
+          
+          <div class="filters">
+            <button class="filter-btn active">All</button>
+            <button class="filter-btn">Branding</button>
+            <button class="filter-btn">Web</button>
+            <button class="filter-btn">Product</button>
+          </div>
+          
+          <div class="work-grid">
+            <div class="work-card">
+              <div class="work-placeholder">Premium Brand Identity</div>
+              <div class="work-card-content">
+                <span class="work-card-category">Branding</span>
+                <h3 class="work-card-title">Aether Co.</h3>
+                <p class="work-card-desc">Complete brand identity system</p>
+              </div>
+            </div>
+            <div class="work-card">
+              <div class="work-placeholder">SaaS Dashboard</div>
+              <div class="work-card-content">
+                <span class="work-card-category">Product</span>
+                <h3 class="work-card-title">Analytics Pro</h3>
+                <p class="work-card-desc">Data visualization dashboard</p>
+              </div>
+            </div>
+            <div class="work-card">
+              <div class="work-placeholder">E-commerce Site</div>
+              <div class="work-card-content">
+                <span class="work-card-category">Web</span>
+                <h3 class="work-card-title">Luxe Store</h3>
+                <p class="work-card-desc">Modern shopping experience</p>
+              </div>
+            </div>
+            <div class="work-card">
+              <div class="work-placeholder">Mobile App UI</div>
+              <div class="work-card-content">
+                <span class="work-card-category">Product</span>
+                <h3 class="work-card-title">Flow App</h3>
+                <p class="work-card-desc">Task management interface</p>
+              </div>
+            </div>
+            <div class="work-card">
+              <div class="work-placeholder">Landing Page</div>
+              <div class="work-card-content">
+                <span class="work-card-category">Web</span>
+                <h3 class="work-card-title">Startup Launch</h3>
+                <p class="work-card-desc">Conversion-optimized landing</p>
+              </div>
+            </div>
+            <div class="work-card">
+              <div class="work-placeholder">Brand Campaign</div>
+              <div class="work-card-content">
+                <span class="work-card-category">Branding</span>
+                <h3 class="work-card-title">Neon Nights</h3>
+                <p class="work-card-desc">Visual identity system</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="featured">
+        <div class="container">
+          <div class="featured-content">
+            <div class="featured-visual">[ Featured project showcase ]</div>
+            <div class="featured-info">
+              <span class="work-card-category">Featured Project</span>
+              <h3>Premium E-commerce Platform</h3>
+              <p>A complete redesign of an online marketplace, focusing on user experience and conversion optimization. The project included user research, wireframing, visual design, and front-end development.</p>
+              <div class="featured-tags">
+                <span class="featured-tag">UI/UX</span>
+                <span class="featured-tag">Figma</span>
+                <span class="featured-tag">React</span>
+                <span class="featured-tag">Next.js</span>
+              </div>
+              <a href="#" class="btn btn-primary">View Case Study</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="contact">
+        <div class="container">
+          <div class="contact-card">
+            <h3>Let's Work Together</h3>
+            <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.</p>
+            <div class="contact-links">
+              <a href="mailto:hello@example.com" class="contact-link">📧 Email</a>
+              <a href="#" class="contact-link">💼 LinkedIn</a>
+              <a href="#" class="contact-link">🐦 Twitter</a>
+              <a href="#" class="contact-link">📱 Dribbble</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>© 2025 Alex Creative. All rights reserved. Built with imagination & AI.</p>
+      </div>
+    </footer>
+  </body>
+</html>

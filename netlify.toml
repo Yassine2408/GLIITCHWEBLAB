@@ -1,0 +1,12 @@
+# Netlify build configuration for static export
+[build]
+  command = "npm run build"
+  publish = "out"
+
+# SPA fallback for Next.js static export
+# This ensures all routes are handled by the client-side router
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+

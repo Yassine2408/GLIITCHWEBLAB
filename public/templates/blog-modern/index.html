@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern Blog • GLIITCH Web Lab</title>
+    <meta name="description" content="Clean and minimalist blog template with dark mode, search functionality, and category filtering." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --bg: #0a0a0f;
+        --card: #12121a;
+        --text: #e6e9ef;
+        --muted: #9aa0aa;
+        --primary: #22d3ee;
+        --primary-2: #06b6d4;
+        --ring: rgba(34, 211, 238, 0.35);
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        background: radial-gradient(1200px 800px at 10% -20%, #0f1724 0%, rgba(15,23,36,0) 60%),
+                    radial-gradient(1000px 700px at 110% 10%, #0e1622 0%, rgba(14,22,34,0) 55%),
+                    linear-gradient(180deg, #0a0a0f 0%, #0c0c13 100%);
+        color: var(--text);
+        line-height: 1.6;
+      }
+      a { color: inherit; text-decoration: none; }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        padding: 0 20px;
+        margin: 0 auto;
+      }
+
+      /* Header */
+      .header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(8px);
+        background: rgba(10,10,15,0.5);
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+      }
+      .nav {
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 700;
+        font-size: 18px;
+      }
+      .brand img {
+        height: 32px;
+        width: 32px;
+        border-radius: 9px;
+        object-fit: cover;
+        box-shadow: 0 6px 18px -8px rgba(34,211,238,.6);
+      }
+      .nav-links {
+        display: flex;
+        gap: 32px;
+      }
+      .nav-links a {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--muted);
+        transition: color 0.2s;
+      }
+      .nav-links a:hover {
+        color: var(--text);
+      }
+
+      /* Hero */
+      .hero {
+        position: relative;
+        padding: 120px 0;
+        text-align: center;
+      }
+      .glow {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: radial-gradient(600px 300px at 50% 0%, rgba(34,211,238,0.25) 0%, rgba(34,211,238,0) 60%);
+      }
+      .hero-content {
+        position: relative;
+      }
+      .hero-title {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: clamp(48px, 7vw, 72px);
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        margin: 0 0 16px;
+      }
+      .hero-subtitle {
+        max-width: 680px;
+        margin: 0 auto;
+        font-size: clamp(18px, 2.5vw, 20px);
+        color: var(--muted);
+      }
+
+      /* Search & Filter Bar */
+      .search-filter {
+        padding: 40px 0 64px;
+      }
+      .search-wrapper {
+        max-width: 600px;
+        margin: 0 auto 32px;
+      }
+      .search-input {
+        width: 100%;
+        padding: 14px 20px;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 12px;
+        color: var(--text);
+        font-size: 15px;
+        font-family: inherit;
+        transition: all 0.2s;
+      }
+      .search-input::placeholder {
+        color: var(--muted);
+      }
+      .search-input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px var(--ring);
+        background: rgba(255,255,255,0.05);
+      }
+      .filter-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .filter-btn {
+        padding: 10px 20px;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 999px;
+        font-size: 14px;
+        color: var(--muted);
+        cursor: pointer;
+        transition: all 0.2s;
+        font-family: inherit;
+      }
+      .filter-btn:hover {
+        background: rgba(34,211,238,0.1);
+        border-color: rgba(34,211,238,0.3);
+        color: var(--text);
+      }
+      .filter-btn.active {
+        background: rgba(34,211,238,0.15);
+        border-color: var(--primary);
+        color: var(--primary);
+      }
+      .filter-btn:focus-visible {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px var(--ring);
+        color: var(--text);
+      }
+
+      /* Blog Post Grid */
+      .blog-section {
+        padding: 0 0 80px;
+      }
+      .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+
+      /* Blog Post Cards */
+      .blog-card {
+        background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 20px;
+        padding: 24px;
+        transition: all 0.3s;
+        cursor: pointer;
+      }
+      .blog-card:hover {
+        transform: translateY(-8px);
+        border-color: rgba(34,211,238,0.3);
+        box-shadow: 0 20px 60px -20px rgba(34,211,238,0.2);
+      }
+      .blog-image {
+        aspect-ratio: 16 / 9;
+        background: linear-gradient(135deg, rgba(34,211,238,0.1), rgba(6,182,212,0.1));
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--muted);
+        font-size: 14px;
+        margin-bottom: 16px;
+        border: 1px dashed rgba(255,255,255,0.1);
+      }
+      .blog-category {
+        display: inline-block;
+        padding: 6px 12px;
+        background: rgba(34,211,238,0.12);
+        border: 1px solid rgba(34,211,238,0.2);
+        border-radius: 999px;
+        font-size: 12px;
+        color: var(--primary);
+        font-weight: 600;
+        margin-bottom: 12px;
+      }
+      .blog-title {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 20px;
+        font-weight: 700;
+        margin: 0 0 12px;
+        line-height: 1.4;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .blog-excerpt {
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.6;
+        margin: 0 0 16px;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .blog-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 13px;
+        color: var(--muted);
+        padding-top: 16px;
+        border-top: 1px solid rgba(255,255,255,0.06);
+      }
+
+      /* Footer */
+      .footer {
+        text-align: center;
+        padding: 48px 0;
+        color: var(--muted);
+        font-size: 13px;
+        border-top: 1px solid rgba(255,255,255,0.06);
+      }
+
+      /* Responsive */
+      @media (max-width: 960px) {
+        .blog-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .hero {
+          padding: 80px 0;
+        }
+        .search-filter {
+          padding: 32px 0 48px;
+        }
+      }
+      @media (max-width: 640px) {
+        .blog-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero {
+          padding: 64px 0;
+        }
+        .nav {
+          height: 56px;
+        }
+        .nav-links {
+          display: none;
+        }
+        .search-wrapper {
+          margin-bottom: 24px;
+        }
+        .filter-buttons {
+          gap: 8px;
+        }
+        .filter-btn {
+          padding: 8px 16px;
+          font-size: 13px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container nav">
+        <div class="brand">
+          <img src="/logo.png" alt="Logo" />
+          <span>Modern Blog</span>
+        </div>
+        <nav class="nav-links">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="glow"></div>
+        <div class="container hero-content">
+          <h1 class="hero-title">Modern Blog</h1>
+          <p class="hero-subtitle">Discover insights, tutorials, and stories from the world of web development and design.</p>
+        </div>
+      </section>
+
+      <section class="search-filter">
+        <div class="container">
+          <div class="search-wrapper">
+            <input type="text" class="search-input" placeholder="Search articles..." aria-label="Search articles" />
+          </div>
+          <div class="filter-buttons" role="group" aria-label="Filter posts by category">
+            <button class="filter-btn active" aria-pressed="true">All</button>
+            <button class="filter-btn" aria-pressed="false">Technology</button>
+            <button class="filter-btn" aria-pressed="false">Design</button>
+            <button class="filter-btn" aria-pressed="false">Development</button>
+            <button class="filter-btn" aria-pressed="false">Lifestyle</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="blog-section">
+        <div class="container">
+          <div class="blog-grid">
+            <article class="blog-card">
+              <div class="blog-image">[Blog post image]</div>
+              <span class="blog-category">Technology</span>
+              <h3 class="blog-title">Building Scalable Web Applications with Next.js</h3>
+              <p class="blog-excerpt">Learn how to architect and build scalable web applications using Next.js, exploring server-side rendering, API routes, and performance optimization techniques that ensure your app can grow with your users.</p>
+              <div class="blog-meta">
+                <span>Dec 15, 2024</span>
+                <span>•</span>
+                <span>7 min read</span>
+              </div>
+            </article>
+
+            <article class="blog-card">
+              <div class="blog-image">[Blog post image]</div>
+              <span class="blog-category">Design</span>
+              <h3 class="blog-title">The Future of Design Systems</h3>
+              <p class="blog-excerpt">Exploring the evolution of design systems and how they're shaping the future of digital product development. Discover best practices for creating maintainable and scalable design systems.</p>
+              <div class="blog-meta">
+                <span>Dec 10, 2024</span>
+                <span>•</span>
+                <span>5 min read</span>
+              </div>
+            </article>
+
+            <article class="blog-card">
+              <div class="blog-image">[Blog post image]</div>
+              <span class="blog-category">Development</span>
+              <h3 class="blog-title">Mastering TypeScript: Advanced Patterns</h3>
+              <p class="blog-excerpt">Deep dive into advanced TypeScript patterns and techniques that will elevate your code quality. From generic constraints to conditional types, master the tools that make TypeScript powerful.</p>
+              <div class="blog-meta">
+                <span>Dec 5, 2024</span>
+                <span>•</span>
+                <span>8 min read</span>
+              </div>
+            </article>
+
+            <article class="blog-card">
+              <div class="blog-image">[Blog post image]</div>
+              <span class="blog-category">Design</span>
+              <h3 class="blog-title">Creating Accessible User Interfaces</h3>
+              <p class="blog-excerpt">A comprehensive guide to building accessible web interfaces that everyone can use. Learn about ARIA attributes, keyboard navigation, and semantic HTML that improves the experience for all users.</p>
+              <div class="blog-meta">
+                <span>Nov 28, 2024</span>
+                <span>•</span>
+                <span>6 min read</span>
+              </div>
+            </article>
+
+            <article class="blog-card">
+              <div class="blog-image">[Blog post image]</div>
+              <span class="blog-category">Development</span>
+              <h3 class="blog-title">Modern CSS Techniques for 2025</h3>
+              <p class="blog-excerpt">Discover the latest CSS features and techniques that are revolutionizing web design. From container queries to cascade layers, stay ahead of the curve with modern CSS capabilities.</p>
+              <div class="blog-meta">
+                <span>Nov 20, 2024</span>
+                <span>•</span>
+                <span>4 min read</span>
+              </div>
+            </article>
+
+            <article class="blog-card">
+              <div class="blog-image">[Blog post image]</div>
+              <span class="blog-category">Design</span>
+              <h3 class="blog-title">The Art of Minimalist Web Design</h3>
+              <p class="blog-excerpt">Explore the principles of minimalist web design and how less can truly be more. Learn how to create elegant, focused interfaces that prioritize user experience and content clarity.</p>
+              <div class="blog-meta">
+                <span>Nov 15, 2024</span>
+                <span>•</span>
+                <span>5 min read</span>
+              </div>
+            </article>
+
+            <article class="blog-card">
+              <div class="blog-image">[Blog post image]</div>
+              <span class="blog-category">Technology</span>
+              <h3 class="blog-title">Understanding React Server Components</h3>
+              <p class="blog-excerpt">Get to grips with React Server Components and how they're changing the way we build React applications. Understand the benefits and trade-offs of this revolutionary approach.</p>
+              <div class="blog-meta">
+                <span>Nov 8, 2024</span>
+                <span>•</span>
+                <span>6 min read</span>
+              </div>
+            </article>
+
+            <article class="blog-card">
+              <div class="blog-image">[Blog post image]</div>
+              <span class="blog-category">Lifestyle</span>
+              <h3 class="blog-title">Work-Life Balance in Tech</h3>
+              <p class="blog-excerpt">Navigating the challenges of maintaining a healthy work-life balance in the fast-paced tech industry. Practical tips and strategies for developers and designers to avoid burnout.</p>
+              <div class="blog-meta">
+                <span>Nov 1, 2024</span>
+                <span>•</span>
+                <span>4 min read</span>
+              </div>
+            </article>
+
+            <article class="blog-card">
+              <div class="blog-image">[Blog post image]</div>
+              <span class="blog-category">Development</span>
+              <h3 class="blog-title">Optimizing Performance with Web Vitals</h3>
+              <p class="blog-excerpt">Learn how to measure and improve your website's performance using Core Web Vitals. Practical techniques for optimizing loading speed, interactivity, and visual stability.</p>
+              <div class="blog-meta">
+                <span>Oct 25, 2024</span>
+                <span>•</span>
+                <span>5 min read</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>© 2025 GLIITCH Web Lab. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>
+

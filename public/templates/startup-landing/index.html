@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Startup Landing • GLIITCH Web Lab</title>
+    <meta name="description" content="Modern, clean landing page perfect for tech startups and SaaS products." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --bg: #0b0b10;
+        --card: #12121a;
+        --muted: #9aa0aa;
+        --text: #e6e9ef;
+        --primary: #9b8cff;
+        --primary-2: #7a6ff2;
+        --ring: rgba(155, 140, 255, 0.35);
+      }
+      html, body { height: 100%; }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: 'Outfit', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        background: radial-gradient(1200px 800px at 10% -20%, #111226 0%, rgba(17,18,38,0) 60%),
+                    radial-gradient(1000px 700px at 110% 10%, #15122b 0%, rgba(21,18,43,0) 55%),
+                    linear-gradient(180deg, #0b0b10 0%, #0e0e14 100%);
+        color: var(--text);
+      }
+      a { color: inherit; text-decoration: none; }
+      .container { width: 100%; max-width: 1120px; padding: 0 20px; margin: 0 auto; }
+      .header {
+        position: sticky; top: 0; z-index: 20;
+        backdrop-filter: blur(8px);
+        background: rgba(11,11,16,0.5);
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+      }
+      .nav { height: 64px; display: flex; align-items: center; justify-content: space-between; }
+      .brand { font-weight: 800; letter-spacing: .5px; color: var(--primary); }
+      .cta-link { font-size: 14px; color: var(--muted); }
+
+      .hero { position: relative; padding: 96px 0; text-align: center; }
+      .glow {
+        position: absolute; inset: 0; pointer-events: none;
+        background: radial-gradient(600px 300px at 50% 0%, rgba(155,140,255,0.25) 0%, rgba(155,140,255,0) 60%);
+      }
+      .title { font-size: clamp(36px, 6vw, 64px); font-weight: 800; letter-spacing: -1px; margin: 0 0 12px; }
+      .subtitle { max-width: 780px; margin: 0 auto 28px; font-size: clamp(16px, 2.2vw, 20px); color: var(--muted); }
+      .buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+      .btn { padding: 12px 18px; border-radius: 12px; font-weight: 600; border: 1px solid rgba(255,255,255,0.08); }
+      .btn-primary { background: linear-gradient(90deg, var(--primary), var(--primary-2)); color: #06060a; border: none; box-shadow: 0 10px 30px -10px var(--ring); }
+      .btn-ghost { color: var(--text); }
+
+      .section { padding: 64px 0; }
+      .section-title { text-align: center; font-size: clamp(22px, 3vw, 32px); font-weight: 800; margin: 0 0 28px; }
+      .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+      .card { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 20px; }
+      .card .icon { height: 40px; width: 40px; border-radius: 10px; background: rgba(155,140,255,0.15); display: flex; align-items: center; justify-content: center; color: var(--primary); margin-bottom: 12px; font-weight: 700; }
+      .card h3 { margin: 0 0 6px; font-size: 16px; }
+      .card p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.55; }
+
+      /* Placeholder blocks (no content) */
+      .ph { background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)); border: 1px dashed rgba(255,255,255,0.18); border-radius: 14px; }
+      .ph-bar { height: 12px; border-radius: 999px; background: rgba(255,255,255,0.1); }
+      .ph-text { height: 10px; background: rgba(255,255,255,0.08); border-radius: 999px; }
+      .ph-img { background: rgba(255,255,255,0.06); border: 1px dashed rgba(255,255,255,0.16); border-radius: 12px; }
+      .stack { display: grid; gap: 10px; }
+
+      .pricing { background: rgba(255,255,255,0.02); border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); }
+      .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+      .price-card { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 20px; }
+      .price-card.featured { box-shadow: 0 0 0 2px var(--ring) inset; }
+      .price { font-size: 28px; font-weight: 800; margin: 8px 0; }
+      .muted { color: var(--muted); }
+      .buy { display: inline-flex; align-items: center; justify-content: center; width: 100%; margin-top: 12px; padding: 10px 14px; border-radius: 10px; font-weight: 700; background: var(--text); color: #0a0a10; }
+      .buy.primary { background: linear-gradient(90deg, var(--primary), var(--primary-2)); color: #06060a; }
+
+      .footer { text-align: center; padding: 36px 0; color: var(--muted); font-size: 13px; }
+
+      @media (max-width: 960px) {
+        .grid, .pricing-grid { grid-template-columns: 1fr; }
+      }
+      @media (max-width: 600px) {
+        .hero { padding: 64px 0; }
+        .buttons { flex-direction: column; align-items: stretch; }
+        .btn { width: 100%; }
+        .nav { height: 56px; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container nav">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <img src="/logo.png" alt="Logo" style="height:32px;width:32px;border-radius:9px;object-fit:cover;box-shadow:0 6px 18px -8px rgba(155,140,255,.6);" />
+          <span style="font-weight:800;letter-spacing:.2px;background:linear-gradient(90deg,#9b8cff,#6aa9ff);-webkit-background-clip:text;background-clip:text;color:transparent;">G‑Lab</span>
+        </div>
+        <a class="cta-link" href="#pricing">Pricing</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="glow"></div>
+        <div class="container" style="position: relative;">
+          <h1 class="title">Build faster. Launch sooner.</h1>
+          <p class="subtitle">A sleek, production-ready landing page for startups and SaaS. Fully responsive and easy to customize.</p>
+          <div class="buttons">
+            <a class="btn btn-primary" href="#features">Explore Features</a>
+            <a class="btn btn-ghost" href="#pricing">Pricing</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="section">
+        <div class="container">
+          <h2 class="section-title">Everything you need to launch</h2>
+          <div class="grid">
+            <div class="card">
+              <div class="icon">1</div>
+              <h3>Responsive by default</h3>
+              <p>Looks great on mobile, tablet, and desktop with modern layout.</p>
+            </div>
+            <div class="card">
+              <div class="icon">2</div>
+              <h3>Clean, accessible</h3>
+              <p>Readable typography and semantic HTML for a solid baseline.</p>
+            </div>
+            <div class="card">
+              <div class="icon">3</div>
+              <h3>Easy to customize</h3>
+              <p>Swap colors, fonts, and sections to fit your brand in minutes.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Product overview with screenshot placeholder -->
+      <section class="section">
+        <div class="container">
+          <h2 class="section-title">Product overview</h2>
+          <div class="ph" style="padding:18px;">
+            <div class="ph-img" style="height:420px; display:flex; align-items:center; justify-content:center; color:var(--muted);">
+              <span>[ Screenshot placeholder ]</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Highlights band with placeholders (no real content) -->
+      <section class="section" style="background: rgba(255,255,255,0.02); border-top:1px solid rgba(255,255,255,0.06); border-bottom:1px solid rgba(255,255,255,0.06);">
+        <div class="container">
+          <div class="grid">
+            <div class="ph" style="padding:18px;">
+              <div class="stack">
+                <div class="ph-bar" style="width:60%"></div>
+                <div class="ph-text" style="width:90%"></div>
+                <div class="ph-text" style="width:70%"></div>
+              </div>
+            </div>
+            <div class="ph" style="padding:18px;">
+              <div class="stack">
+                <div class="ph-bar" style="width:40%"></div>
+                <div class="ph-text" style="width:85%"></div>
+                <div class="ph-text" style="width:65%"></div>
+              </div>
+            </div>
+            <div class="ph" style="padding:18px;">
+              <div class="stack">
+                <div class="ph-bar" style="width:50%"></div>
+                <div class="ph-text" style="width:92%"></div>
+                <div class="ph-text" style="width:60%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="pricing" class="section pricing">
+        <div class="container">
+          <h2 class="section-title">Simple pricing</h2>
+          <div class="pricing-grid">
+            <div class="price-card">
+              <h3>Starter</h3>
+              <div class="price">$29</div>
+              <p class="muted">Basic sections to get online quickly</p>
+              <a href="#" class="buy">Choose</a>
+            </div>
+            <div class="price-card featured">
+              <h3>Pro</h3>
+              <div class="price">$49</div>
+              <p class="muted">Full sections and premium styling</p>
+              <a href="#" class="buy primary">Choose</a>
+            </div>
+            <div class="price-card">
+              <h3>Agency</h3>
+              <div class="price">$99</div>
+              <p class="muted">Extended license for client projects</p>
+              <a href="#" class="buy">Choose</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ (structure only) -->
+      <section class="section">
+        <div class="container">
+          <h2 class="section-title">FAQ</h2>
+          <div class="grid">
+            <div class="card">
+              <div class="stack">
+                <div class="ph-bar" style="width:55%"></div>
+                <div class="ph-text" style="width:95%"></div>
+                <div class="ph-text" style="width:80%"></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="stack">
+                <div class="ph-bar" style="width:45%"></div>
+                <div class="ph-text" style="width:90%"></div>
+                <div class="ph-text" style="width:70%"></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="stack">
+                <div class="ph-bar" style="width:50%"></div>
+                <div class="ph-text" style="width:96%"></div>
+                <div class="ph-text" style="width:75%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Final CTA -->
+      <section class="section">
+        <div class="container" style="text-align:center;">
+          <div class="ph" style="padding:28px; display:inline-block; min-width:min(700px, 100%);">
+            <div class="stack" style="max-width:680px; margin:0 auto;">
+              <div class="ph-bar" style="width:50%; height:14px; margin:0 auto;"></div>
+              <div class="ph-text" style="width:80%; height:12px; margin:0 auto;"></div>
+            </div>
+            <div style="height:16px"></div>
+            <a class="btn btn-primary" href="#">Primary action</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">© GLIITCH Web Lab</footer>
+  </body>
+  </html>
+
+

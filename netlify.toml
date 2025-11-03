@@ -1,7 +1,8 @@
 # Netlify build configuration for static export
 [build]
-  command = "npm run build"
+  command = "npm install && npm run build"
   publish = "out"
+  base = "."
 
 # SPA fallback for Next.js static export
 # This ensures all routes are handled by the client-side router

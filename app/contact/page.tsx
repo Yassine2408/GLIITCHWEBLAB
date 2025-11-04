@@ -1,10 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { templates } from '@/data/templates'
 
-export default function ContactPage() {
+function ContactForm() {
   const searchParams = useSearchParams()
   const [formData, setFormData] = useState({
     name: '',
@@ -37,12 +37,8 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="min-h-screen py-16">
-      <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white">
-          Get in Touch
-        </h1>
-        <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-8 shadow-subtle">
+    <>
+      <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-8 shadow-subtle">
           <div className="mb-6 p-4 bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800 rounded-lg">
             <p className="text-sm text-primary-800 dark:text-primary-200">
               Interested in purchasing a template? Let us know which one and we&apos;ll get back to you with payment details.
@@ -121,6 +117,27 @@ export default function ContactPage() {
             </a>
           </div>
         </div>
+      </>
+  )
+}
+
+export default function ContactPage() {
+  return (
+    <div className="min-h-screen py-16">
+      <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 className="text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white">
+          Get in Touch
+        </h1>
+        <Suspense fallback={
+          <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-8 shadow-subtle">
+            <div className="animate-pulse">
+              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-4"></div>
+              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
+            </div>
+          </div>
+        }>
+          <ContactForm />
+        </Suspense>
       </div>
     </div>
   )

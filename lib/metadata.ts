@@ -82,12 +82,12 @@ export function createTemplateMetadata(template: Template): Metadata {
     keywords: template.keywords,
   })
 
-  // Override Open Graph type to 'product' for template pages
+  // Override Open Graph type for template pages (use 'website' as 'product' is not a valid Next.js OG type)
   return {
     ...metadata,
     openGraph: {
       ...metadata.openGraph,
-      type: 'product',
+      type: 'website',
     },
   }
 }

@@ -21,6 +21,10 @@ export default function AdminPage() {
     fullDescription: "",
     techStack: "",
     imageUrl: "",
+    category: "",
+    price: "",
+    releaseDate: "",
+    popularityScore: "",
   });
   const [formError, setFormError] = useState("");
   // Login handler
@@ -57,10 +61,25 @@ export default function AdminPage() {
         fullDescription: form.fullDescription,
         techStack: form.techStack.split(",").map((t) => t.trim()),
         imageUrl: form.imageUrl || undefined,
+        category: form.category || "Other",
+        price: form.price ? parseFloat(form.price) : 0,
+        releaseDate: form.releaseDate || new Date().toISOString().split("T")[0],
+        popularityScore: form.popularityScore ? parseInt(form.popularityScore) : 0,
       },
       ...templates,
     ]);
-    setForm({ id: "", name: "", description: "", fullDescription: "", techStack: "", imageUrl: "" });
+    setForm({ 
+      id: "", 
+      name: "", 
+      description: "", 
+      fullDescription: "", 
+      techStack: "", 
+      imageUrl: "",
+      category: "",
+      price: "",
+      releaseDate: "",
+      popularityScore: "",
+    });
     setFormError("");
   };
 
@@ -181,6 +200,40 @@ export default function AdminPage() {
             onChange={(e) => setForm({ ...form, techStack: e.target.value })}
             className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100"
           />
+          <div className="grid grid-cols-2 gap-2">
+            <input
+              type="text"
+              placeholder="Category"
+              value={form.category}
+              onChange={(e) => setForm({ ...form, category: e.target.value })}
+              className="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100"
+            />
+            <input
+              type="number"
+              placeholder="Price"
+              value={form.price}
+              onChange={(e) => setForm({ ...form, price: e.target.value })}
+              className="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100"
+            />
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            <input
+              type="date"
+              placeholder="Release Date"
+              value={form.releaseDate}
+              onChange={(e) => setForm({ ...form, releaseDate: e.target.value })}
+              className="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100"
+            />
+            <input
+              type="number"
+              placeholder="Popularity Score (0-100)"
+              value={form.popularityScore}
+              onChange={(e) => setForm({ ...form, popularityScore: e.target.value })}
+              className="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100"
+              min="0"
+              max="100"
+            />
+          </div>
           {formError && <p className="text-red-500 text-sm">{formError}</p>}
           <button type="submit" className="w-full py-2 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 transition">
             Add Template

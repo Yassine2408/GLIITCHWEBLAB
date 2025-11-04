@@ -63,7 +63,7 @@ export default function CategoryFilter({ categories, selectedCategory, onChange 
       aria-label="Filter by category"
     >
       <button
-        ref={(el) => (buttonRefs.current[0] = el)}
+        ref={(el) => { buttonRefs.current[0] = el }}
         onClick={() => onChange(null)}
         aria-checked={selectedCategory === null}
         role="radio"
@@ -80,7 +80,7 @@ export default function CategoryFilter({ categories, selectedCategory, onChange 
         return (
           <button
             key={category}
-            ref={(el) => (buttonRefs.current[index + 1] = el)}
+            ref={(el) => { buttonRefs.current[index + 1] = el }}
             onClick={() => onChange(category)}
             aria-checked={isSelected}
             role="radio"

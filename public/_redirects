@@ -1,6 +1,0 @@
-# Netlify redirects for Next.js static export
-# This file ensures client-side routing works correctly
-# All routes are redirected to index.html for SPA behavior
-
-/*    /index.html   200
-

@@ -4,7 +4,7 @@ import { generateContactPageSchema, generateBreadcrumbListSchema, jsonLdScriptPr
 
 export const metadata: Metadata = createMetadata({
   title: 'Contact Us',
-  description: 'Get in touch with GLIITCH Web Lab. Have questions about our templates? Reach out at hello@gliitchweblab.com',
+  description: 'Get in touch with GLIITCH Web Lab. Have questions about our templates? Reach out at Gliitch2408@gmail.com',
   path: '/contact',
 })
 

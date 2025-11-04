@@ -110,10 +110,10 @@ function ContactForm() {
           <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-800 text-center">
             <p className="text-gray-600 dark:text-gray-400">Or reach us directly at:</p>
             <a
-              href="mailto:hello@gliitchweblab.com"
+              href="mailto:Gliitch2408@gmail.com"
               className="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 font-medium"
             >
-              hello@gliitchweblab.com
+              Gliitch2408@gmail.com
             </a>
           </div>
         </div>

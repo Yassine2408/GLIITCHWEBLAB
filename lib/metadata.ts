@@ -8,7 +8,7 @@ export const siteConfig = {
   tagline: 'Handcrafted Website Templates',
   social: {
     twitter: '@gliitchweblab', // Update with actual Twitter handle
-    email: 'hello@gliitchweblab.com',
+    email: 'Gliitch2408@gmail.com',
   },
   defaultOgImage: '/og-default.png',
 }

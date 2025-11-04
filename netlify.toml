@@ -1,3 +1,4 @@
 # Netlify build configuration for static export
 [build]
+  command = "npm run build"
   publish = "out"

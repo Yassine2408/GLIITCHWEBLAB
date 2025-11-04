@@ -281,6 +281,50 @@ This project uses Next.js static export (`output: 'export'` in `next.config.js`)
 - All routes are generated as static HTML files
 - No API routes or server-side features are available
 
+## Troubleshooting
+
+### Build Failures
+
+**Issue: Build fails with "Cannot find module" errors**
+- Ensure all dependencies are installed: `npm install`
+- Verify `package.json` exists and contains all required dependencies
+- Clear `.next` and `node_modules` directories, then reinstall: `rm -rf .next node_modules && npm install`
+
+**Issue: Netlify build fails at "Building" stage**
+- Verify `package.json` is committed to the repository
+- Check that `netlify.toml` build command matches your `package.json` scripts
+- Ensure `next.config.js` has `output: 'export'` for static export deployment
+- Verify Node.js version in `.nvmrc` matches `NODE_VERSION` in `netlify.toml`
+
+**Issue: TypeScript errors during build**
+- Ensure `tsconfig.json` exists and is properly configured
+- Check that all source files have correct type definitions
+- Verify `@types/*` packages are installed in `devDependencies`
+
+**Issue: Missing static assets or images**
+- Verify `public/` directory exists and contains all referenced assets
+- Check that image paths in code match files in `public/` directory
+- Ensure `public/` directory is committed to git
+
+### Deployment Verification
+
+Before pushing to production, verify locally:
+1. Run `npm run build` successfully
+2. Check that `out/` directory is generated
+3. Preview the build: `npx serve out`
+4. Verify all environment variables are set in Netlify dashboard
+
+### Common Git Issues
+
+**Issue: Files missing from repository**
+- Always verify files are committed: `git status`
+- Check what's tracked: `git ls-files`
+- Never commit build artifacts: ensure `.gitignore` is up to date
+
+**Issue: Repository structure mismatch**
+- Ensure you're working from the repository root (where `package.json` is located)
+- Verify git root: `git rev-parse --show-toplevel`
+
 ## Customization
 
 - Replace placeholder preview images with actual screenshots
@@ -288,5 +332,5 @@ This project uses Next.js static export (`output: 'export'` in `next.config.js`)
 - Payment integration (Lemon Squeezy) is planned for future implementation. Currently, buy buttons direct users to contact form.
 - Customize colors in `tailwind.config.js`
 - Update SEO metadata in `lib/metadata.ts` before deployment
-- Configure analytics provider and credentials in `.env.local` (see `.env.example`)
+- Configure analytics provider and credentials in `.env.local` (see `.env.local.example`)
 

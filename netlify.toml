@@ -2,4 +2,3 @@
 [build]
   command = "npm install && npm run build"
   publish = "out"
-  base = "."
